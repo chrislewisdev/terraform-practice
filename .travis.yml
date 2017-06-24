@@ -3,17 +3,21 @@ notifications:
 
 language: node_js
 
+#Download and unpack terraform
 before_install:
   - wget https://releases.hashicorp.com/terraform/0.9.6/terraform_0.9.6_linux_amd64.zip
   - unzip terraform_0.9.6_linux_amd64.zip
 
 script:
+  #Zip our lambda contents into a subfolder
   - mkdir deploy
   - zip deploy/deploy.zip index.js
+  #Run terraform plan to check if our infrastructure changes match what we want
   - ./terraform init
   - ./terraform plan
 
 deploy:
+  #Deploy our zip to S3: Terraform will use it to deploy the lambda
   - provider: s3
     access_key_id: $AWS_ACCESS_KEY_ID
     secret_access_key: $AWS_SECRET_ACCESS_KEY
@@ -22,6 +26,7 @@ deploy:
     skip_cleanup: true
     region: "ap-southeast-2"
 
+  #Apply all infrastructure changes!
   - provider: script
     script: ./terraform apply
     skip_cleanup: true
