@@ -24,3 +24,4 @@ deploy:
 
   - provider: script
     script: ./terraform apply
+    skip_cleanup: true
