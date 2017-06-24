@@ -1,3 +1,5 @@
 language: node_js
 
-script: ""
+script:
+  - mkdir deploy
+  - zip deploy/deploy.zip index.js
