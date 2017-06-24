@@ -10,8 +10,8 @@ before_install:
 script:
   - mkdir deploy
   - zip deploy/deploy.zip index.js
-  - terraform init
-  - terraform plan
+  - ./terraform init
+  - ./terraform plan
 
 deploy:
   - provider: s3
@@ -23,4 +23,4 @@ deploy:
     region: "ap-southeast-2"
 
   - provider: script
-    script: terraform apply
+    script: ./terraform apply
