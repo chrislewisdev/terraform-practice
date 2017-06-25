@@ -1,7 +1,7 @@
 notifications:
   email: false
 
-language: node_js
+language: generic
 
 #Download and unpack terraform
 before_install:
