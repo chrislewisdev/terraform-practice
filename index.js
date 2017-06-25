@@ -1,7 +1,7 @@
 'use strict';
 
 exports.helloWorld = (event, context, callback) => {
-    callback(null, 'Hello World');
+    callback(null, 'Hi everybody!');
 };
 
 exports.goodbye = (event, context, callback) => {
