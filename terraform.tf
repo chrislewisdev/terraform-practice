@@ -50,6 +50,8 @@ resource "aws_api_gateway_integration" "root_mock_get_endpoint_integration" {
   resource_id   = "${aws_api_gateway_rest_api.terraform_practice_api.root_resource_id}"
   http_method = "GET"
   type = "MOCK"
+
+  depends_on = ["aws_api_gateway_method.root_mock_get_endpoint"]
 }
 
 resource "aws_api_gateway_integration_response" "root_mock_get_endpoint_integration_response" {
@@ -57,11 +59,15 @@ resource "aws_api_gateway_integration_response" "root_mock_get_endpoint_integrat
   resource_id   = "${aws_api_gateway_rest_api.terraform_practice_api.root_resource_id}"
   http_method = "GET"
   status_code = "200"
+
+  depends_on = ["aws_api_gateway_integration.root_mock_get_endpoint_integration"]
 }
 
-resource "aws_api_gateway_integration_response" "root_mock_get_endpoint_response" {
+resource "aws_api_gateway_method_response" "root_mock_get_endpoint_response" {
   rest_api_id   = "${aws_api_gateway_rest_api.terraform_practice_api.id}"
   resource_id   = "${aws_api_gateway_rest_api.terraform_practice_api.root_resource_id}"
   http_method = "GET"
   status_code = "200"
+
+  depends_on = ["aws_api_gateway_method.root_mock_get_endpoint"]
 }
